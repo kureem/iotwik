@@ -1,8 +1,10 @@
-package com.archnetltd.iot.controllers;
+package com.archnetltd.iot.repositories;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+
+import com.archnetltd.iot.Device;
 
 public interface DeviceRepository extends CrudRepository<Device, String>{
 	

@@ -1,12 +1,14 @@
-package com.archnetltd.iot.controllers;
+package com.archnetltd.iot;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
 public class Device {
+	//new,online,offline
 
 	@Id
 	private String mac;
@@ -15,6 +17,7 @@ public class Device {
 
 	private String description;
 
+	@Column(updatable = false)
 	private Date createdDate = new Date();
 
 	private Date modifiedDate = new Date();
@@ -22,6 +25,10 @@ public class Device {
 	private String status;
 
 	private String owner;
+	
+	private String microController = "esp32";
+	
+	private String category;
 
 	public String getName() {
 		return name;
@@ -78,5 +85,23 @@ public class Device {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getMicroController() {
+		return microController;
+	}
+
+	public void setMicroController(String microController) {
+		this.microController = microController;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	
 
 }

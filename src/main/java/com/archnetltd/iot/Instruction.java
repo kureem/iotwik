@@ -1,7 +1,8 @@
-package com.archnetltd.iot.controllers;
+ package com.archnetltd.iot;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,8 +23,10 @@ public class Instruction {
 	
 	private String parameterValue;
 	
+	//ready,executing,executed,obsolete
 	private String status;
 	
+	@Column(updatable = false)
 	private Date createdDate = new Date();
 	
 	private Date modifiedDate = new Date();

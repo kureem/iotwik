@@ -1,11 +1,12 @@
-package com.archnetltd.iot.controllers;
+package com.archnetltd.iot;
+
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 
@@ -15,6 +16,9 @@ public class Parameter {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
+	private String name;
+	
+	//input,output
 	private String direction;
 	
 	private String mac;
@@ -29,6 +33,10 @@ public class Parameter {
 	private String description;
 	
 	private String owner;
+	
+	private String currentValue;
+	
+	private Date lastModifiedDate;
 
 	public String getDirection() {
 		return direction;
@@ -92,6 +100,30 @@ public class Parameter {
 
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+
+	public String getCurrentValue() {
+		return currentValue;
+	}
+
+	public void setCurrentValue(String currentValue) {
+		this.currentValue = currentValue;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

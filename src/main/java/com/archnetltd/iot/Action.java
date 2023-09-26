@@ -1,4 +1,4 @@
-package com.archnetltd.iot.controllers;
+package com.archnetltd.iot;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,18 +7,17 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Action {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	
+
 	private String name;
-	
+
 	private String mac;
-	
+
 	private String description;
-	
+
 	private String owner;
 
 	public String getName() {
@@ -60,6 +59,5 @@ public class Action {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-	
-	
+
 }
