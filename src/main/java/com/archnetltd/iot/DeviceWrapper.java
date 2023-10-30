@@ -2,13 +2,19 @@ package com.archnetltd.iot;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class DeviceWrapper {
 	private Device device;
 	
 	private List<Action> actions;
 	
 	private List<Parameter> parameters;
+	
+	
+	private String mac;
 
+	
 	public Device getDevice() {
 		return device;
 	}
@@ -50,5 +56,14 @@ public class DeviceWrapper {
 		}
 		return null;
 	}
+
+	public String getMac() {
+		return mac;
+	}
+
+	public void setMac(String mac) {
+		this.mac = mac;
+	}
+	
 
 }

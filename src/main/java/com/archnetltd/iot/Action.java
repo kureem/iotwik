@@ -1,4 +1,4 @@
-package com.archnetltd.iot;
+ package com.archnetltd.iot;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

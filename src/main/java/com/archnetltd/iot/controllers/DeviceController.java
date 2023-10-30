@@ -46,6 +46,10 @@ public class DeviceController {
 	public Map<String,Object> startDevice(HttpServletRequest request, @RequestBody Map<String, String> body) throws Exception {
 		System.out.println("starting device:" + body);
 		String mac = body.get("mac");
+		return startDevice(mac);
+	}
+	
+	public Map<String,Object> startDevice(String mac) throws Exception {
 		 iotService.startDevice(mac);
 		 DeviceWrapper wrapper = iotService.getDevice(mac);
 		 Map<String,Object> result = new HashMap<>();
@@ -57,11 +61,16 @@ public class DeviceController {
 	
 	@PostMapping("/acknowledge")
 	public Map<String,Object> acknowledgeInstructions(HttpServletRequest request, @RequestBody Map<String,Object> body){
+		return acknowledgeInstructions(body);
+	}
+	
+	public Map<String,Object> acknowledgeInstructions(Map<String,Object> body){
 		String mac = (String)body.get("mac");
 		List<Integer> instructionIds = (List<Integer>)body.get("instructions");
-		iotService.acknowledgeInstructions(mac, instructionIds);
+		DeviceWrapper d = iotService.acknowledgeInstructions(mac, instructionIds);
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", "0");
+		result.put("device", d);
 		return result;
 	}
 
@@ -78,12 +87,25 @@ public class DeviceController {
 
 		return result;
 	}
+	
+	public Map<String, Object> getMacDevice(String mac) {
+
+		DeviceWrapper w = iotService.getDevice(mac);
+		Map<String, Object> result = new HashMap<>();
+		result.put("device", w);
+		//result.put("actions", w.getActions());
+		//result.put("params", w.getParameters());
+		result.put("code", "0");
+		result.put("message", "success");
+
+		return result;
+	}
 
 	@PostMapping("/add-instruction")
 	public Map<String, Object> addInstruction(@RequestBody Instruction instruction) {
 		iotService.addInstruction(instruction);
 		Map<String, Object> result = new HashMap<>();
-		result.put("device", instruction);
+		result.put("instruction", instruction);
 		result.put("code", "0");
 		result.put("message", "success");
 		return result;

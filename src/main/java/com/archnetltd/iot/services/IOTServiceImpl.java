@@ -91,8 +91,12 @@ public class IOTServiceImpl implements IOTService{
 		return instruction;
 	}
 
+	/**
+	 * Will change the status of the instructions from Ready to Executed<br>
+	 * Will set the value of the Parameter of the device to the value instructed in the instruction
+	 */
 	@Override
-	public void acknowledgeInstructions(String mac, List<Integer> intructionIds) {
+	public DeviceWrapper acknowledgeInstructions(String mac, List<Integer> intructionIds) {
 		List<Instruction> instructions = instructionRepository.findByIdInOrderByCreatedDateDesc(intructionIds);
 		 
 		List<Parameter> paramsu = new ArrayList<>();
@@ -102,18 +106,21 @@ public class IOTServiceImpl implements IOTService{
 			String paramName = i.getParameterName();
 			String val = i.getParameterValue();
 			Parameter p = w.getParameter(paramName);
-			p.setCurrentValue(val);
+			if(p.getCurrentValue()== null || !p.getCurrentValue().equals(val)) {
+				p.setCurrentValue(val);
 			//if(p.getCurrentValue() != null && !p.getCurrentValue().equals(val)) {
-			p.setLastModifiedDate(new Date());
-			if(!namesu.contains(p.getName())) {
-				paramsu.add(p);
-				namesu.add(p.getName());
+				p.setLastModifiedDate(new Date());
+				if(!namesu.contains(p.getName())) {
+					paramsu.add(p);
+					namesu.add(p.getName());
+				}
 			}
 			
 			i.setStatus("Executed");
 		}
 		parameterRepository.saveAll(paramsu);
 		instructionRepository.saveAll(instructions);
+		return w;
 		
 	}
 

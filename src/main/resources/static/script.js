@@ -1,4 +1,6 @@
 
+
+
 function getDevice(mac){
 	var settings = {
   		"url": "iot/get-device?mac=" + mac,
@@ -75,3 +77,46 @@ function addInstruction(mac,name, checked){
 
 	xhr.send(data);
  }
+ 
+ function connect() {
+	window.ws = new WebSocket('ws://localhost:8080/ws/acknowledge');
+	window.ws.onmessage = function(data){
+		showGreeting(data.data);
+	}
+	 setConnected(true);
+}
+
+function getWS(){
+	return window.ws;
+}
+function sendMessage(payload){
+	getWS().send(JSON.stringify(payload));
+}
+
+function disconnect() {
+    if (ws != null) {
+        ws.close();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}
+
+function setConnected(connected) {
+    $("#connect").prop("disabled", connected);
+    $("#disconnect").prop("disabled", !connected);
+    if (connected) {
+        $("#conversation").show();
+    }
+    else {
+        $("#conversation").hide();
+    }
+    $("#greetings").html("");
+}
+
+function sendName() {
+    ws.send($("#name").val());
+}
+
+function showGreeting(message) {
+    $("#greetings").append(" " + message + "");
+}

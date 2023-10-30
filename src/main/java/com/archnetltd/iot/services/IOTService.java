@@ -9,7 +9,7 @@ public interface IOTService {
 	
 	public  List<Instruction> getLatestInstructions(String mac);
 	
-	public void acknowledgeInstructions(String mac, List<Integer> intructionIds);
+	public DeviceWrapper acknowledgeInstructions(String mac, List<Integer> intructionIds);
 	
 	public DeviceWrapper getDevice(String mac);
 	
