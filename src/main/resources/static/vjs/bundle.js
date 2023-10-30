@@ -148,7 +148,7 @@ var iot;
             }
         }
     }
-    Main.server = "ws://wikiot-8b90821c8c23.herokuapp.com/ws/acknowledge";
+    Main.server = "wss://wikiot-8b90821c8c23.herokuapp.com/ws/acknowledge";
     iot.Main = Main;
     Main["__class"] = "iot.Main";
 })(iot || (iot = {}));
